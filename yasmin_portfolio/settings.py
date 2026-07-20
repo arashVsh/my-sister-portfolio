@@ -6,10 +6,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security
 
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    "temporary-local-development-key-change-before-production",
-)
+DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
+
+if DEBUG:
+    SECRET_KEY = os.environ.get(
+        "SECRET_KEY",
+        "local-development-only-secret-key",
+    )
+else:
+    SECRET_KEY = os.environ["SECRET_KEY"]
 
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
@@ -125,12 +130,15 @@ STORAGES = {
 # Security settings used in production
 
 if not DEBUG:
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = "DENY"
+    REFERRER_POLICY = "strict-origin-when-cross-origin"
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    SECURE_HSTS_PRELOAD = False
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
