@@ -1,53 +1,110 @@
-# Yasmin Vashagh Portfolio — Django
+# Yasmin Vashagh Portfolio
 
-A responsive English-language portfolio website for Yasmin Vashagh, built with Python and Django.
+A personal portfolio website for **Yasmin Vashagh**, built with **Python, Django, HTML, CSS, and JavaScript**.
+
+The website presents her academic background, publication, science education work, paintings, violin performances, awards, and competitive swimming achievements.
+
+## Live Website
+
+[Visit yasminvashagh.com](https://yasminvashagh.com)
+
+## About Yasmin
+
+Yasmin Vashagh is a graduate of Farzanegan Amin 2 High School in Isfahan, Iran, part of Iran’s National Organization for Development of Exceptional Talents.
+
+Her interests include:
+
+- Biology and biotechnology
+- Biomedical research
+- Science education
+- Painting
+- Violin performance
+- Competitive swimming
+
+She is also a published co-author in the field of medical artificial intelligence.
+
+## Website Sections
+
+The portfolio includes:
+
+- **About** — introduction and academic interests
+- **Education** — high school background, GPA, and selected grades
+- **Research** — publication on deep learning for brain tumor detection
+- **Teaching** — biology and science education through YouTube
+- **Art** — selected paintings
+- **Music** — selected violin performances
+- **Awards** — achievements in painting, violin, swimming, and academic activities
+- **Contact** — email and social media links
+
+## Main Links
+
+- Portfolio: [yasminvashagh.com](https://yasminvashagh.com)
+- YouTube: [Yasmin Vashagh](https://www.youtube.com/@YasminVashagh)
+- Instagram: [@yasmin_vashagh](https://www.instagram.com/yasmin_vashagh/)
+- Publication: [CIVILICA](https://en.civilica.com/doc/2042459/)
+- Email: [yasmin.vashagh@gmail.com](mailto:yasmin.vashagh@gmail.com)
 
 ## Features
 
-- Sticky section navigation
-- Responsive desktop and mobile design
-- Local portrait, artwork, and video loading
-- Artwork lightbox gallery
-- Local violin video playback
+- Responsive design for desktop and mobile devices
+- Sticky navigation menu
+- Artwork gallery with image preview
+- Locally hosted violin performance videos
 - Downloadable résumé
-- Publication, YouTube, Instagram, and email links
-- Sections for education, research, teaching, art, music, awards, and contact
-- WhiteNoise support for static-file deployment
+- Publication and social media links
+- Fast static asset delivery with WhiteNoise
+- Django production deployment support
 
-## 1. Add Yasmin's files
+## Technologies
 
-Copy the files into these exact locations:
+- Python
+- Django
+- HTML
+- CSS
+- JavaScript
+- WhiteNoise
+- Gunicorn
 
-```text
-portfolio/static/portfolio/images/Vashagh_Yasmin_Photo.jpg
+## Local Development
 
-portfolio/static/portfolio/images/gallery/1.jpg
-portfolio/static/portfolio/images/gallery/2.jpg
-portfolio/static/portfolio/images/gallery/3.jpg
-portfolio/static/portfolio/images/gallery/4.jpg
-portfolio/static/portfolio/images/gallery/5.jpg
-portfolio/static/portfolio/images/gallery/6.jpg
-portfolio/static/portfolio/images/gallery/7.jpg
-portfolio/static/portfolio/images/gallery/8.jpg
+Clone the repository:
 
-portfolio/static/portfolio/videos/1.mp4
-portfolio/static/portfolio/videos/2.mp4
-portfolio/static/portfolio/videos/3.mp4
-
-portfolio/static/portfolio/documents/Yasmin_Vashagh_Resume.pdf
+```bash
+git clone https://github.com/arashVsh/my-sister-portfolio.git
+cd my-sister-portfolio
 ```
 
-The résumé should be exported from LaTeX as `Yasmin_Vashagh_Resume.pdf`.
+Create a virtual environment:
 
-## 1. Install and run
-
-### Windows PowerShell
+### Windows
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
+```
+
+### macOS or Linux
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install the dependencies:
+
+```bash
 pip install -r requirements.txt
+```
+
+Run the database migrations:
+
+```bash
 python manage.py migrate
+```
+
+Start the development server:
+
+```bash
 python manage.py runserver
 ```
 
@@ -57,52 +114,57 @@ Open:
 http://127.0.0.1:8000/
 ```
 
-### macOS or Linux
+## Project Structure
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+```text
+my-sister-portfolio/
+├── manage.py
+├── requirements.txt
+├── build.sh
+├── yasmin_portfolio/
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+└── portfolio/
+    ├── templates/
+    │   └── portfolio/
+    │       └── home.html
+    ├── static/
+    │   └── portfolio/
+    │       ├── css/
+    │       ├── js/
+    │       ├── images/
+    │       ├── videos/
+    │       └── documents/
+    ├── views.py
+    └── urls.py
 ```
 
-## 3. Production notes
+## Deployment
 
-Before deployment:
+The project is configured for deployment with:
 
-1. Change `SECRET_KEY` in `yasmin_portfolio/settings.py`.
-2. Set `DEBUG = False`.
-3. Add the production domain to `ALLOWED_HOSTS`.
-4. Run:
+- Gunicorn
+- WhiteNoise
+- Environment-based Django settings
+- Static file collection through `collectstatic`
 
-```bash
-python manage.py collectstatic
+Required production environment variables:
+
+```text
+SECRET_KEY=your-secure-secret-key
+DEBUG=False
 ```
 
-A typical start command is:
+The production start command is:
 
 ```bash
 gunicorn yasmin_portfolio.wsgi:application
 ```
 
-## Main links included
+## Licence
 
-- Email: yasmin.vashagh@gmail.com
-- YouTube: https://www.youtube.com/@YasminVashagh
-- Instagram: https://www.instagram.com/yasmin_vashagh/?hl=en
-- Publication: https://en.civilica.com/doc/2042459/
+This repository contains personal photographs, artwork, videos, résumé content, and other media belonging to Yasmin Vashagh.
 
-## Content updates
-
-Most visible content is in:
-
-```text
-portfolio/templates/portfolio/home.html
-```
-
-Styles are in:
-
-```text
-portfolio/static/portfolio/css/style.css
-```
+The source code may be viewed for educational purposes, but the personal media and portfolio content may not be reused, reproduced, or redistributed without permission.
