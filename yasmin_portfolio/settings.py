@@ -23,7 +23,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "yasminvashagh.com",
     "www.yasminvashagh.com",
-    ".onrender.com",
+    ".vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -35,11 +35,6 @@ CSRF_TRUSTED_ORIGINS = [
 # Applications
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
     "django.contrib.staticfiles",
     "portfolio",
 ]
@@ -50,11 +45,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
