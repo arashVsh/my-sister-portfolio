@@ -4,19 +4,19 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# --------------------
 # Security
+# --------------------
 
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
 if DEBUG:
     SECRET_KEY = os.environ.get(
         "SECRET_KEY",
-        "local-development-only-secret-key",
+        "local-development-secret-key-only-do-not-use-in-production-2026",
     )
 else:
     SECRET_KEY = os.environ["SECRET_KEY"]
-
-DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
@@ -32,7 +32,9 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
+# --------------------
 # Applications
+# --------------------
 
 INSTALLED_APPS = [
     "django.contrib.staticfiles",
@@ -40,17 +42,22 @@ INSTALLED_APPS = [
 ]
 
 
+# --------------------
 # Middleware
+# --------------------
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 
-# URLs and application entry points
+# --------------------
+# URLs and application
+# --------------------
 
 ROOT_URLCONF = "yasmin_portfolio.urls"
 
@@ -58,7 +65,9 @@ WSGI_APPLICATION = "yasmin_portfolio.wsgi.application"
 ASGI_APPLICATION = "yasmin_portfolio.asgi.application"
 
 
+# --------------------
 # Templates
+# --------------------
 
 TEMPLATES = [
     {
@@ -68,44 +77,28 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
 
-# Database
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-
-# Password validation
-
-AUTH_PASSWORD_VALIDATORS = []
-
-
+# --------------------
 # Internationalization
+# --------------------
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "Asia/Tehran"
 
 USE_I18N = True
-
 USE_TZ = True
 
 
+# --------------------
 # Static files
+# --------------------
 
 STATIC_URL = "/static/"
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES = {
@@ -118,21 +111,27 @@ STORAGES = {
 }
 
 
-# Security settings used in production
+# --------------------
+# Production security
+# --------------------
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+X_FRAME_OPTIONS = "DENY"
 
 if not DEBUG:
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    X_FRAME_OPTIONS = "DENY"
-    REFERRER_POLICY = "strict-origin-when-cross-origin"
     SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
     CSRF_COOKIE_SECURE = True
+
     SECURE_HSTS_SECONDS = 3600
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
     SECURE_HSTS_PRELOAD = False
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
-# Default primary key field type
+# --------------------
+# Default primary key
+# --------------------
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
